@@ -1,4 +1,4 @@
-const database = require('../models');
+const database = require("../models");
 
 class PessoaController {
     static async pegaTodasAsPessoas(req, res){
@@ -17,7 +17,7 @@ class PessoaController {
             const umaPessoa = await database.Pessoas.findOne({ where: { id: Number(id) }});
             return res.status(200).json(umaPessoa);
         } catch (error) {
-            return res.status(500).json(erro.message);
+            return res.status(500).json(error.message);
         }
     }
 
@@ -27,7 +27,7 @@ class PessoaController {
             const novaPessoaCriada = await database.Pessoas.create(novaPessoa);
             return res.status(201).json(novaPessoaCriada);
         } catch (error) {
-            return res.status(500).json(erro.message);
+            return res.status(500).json(error.message);
         }
     }
 
@@ -40,7 +40,7 @@ class PessoaController {
             const pessoaAtualizada = await database.Pessoas.findOne({ where: { id: Number(id) }});
             return res.status(200).json(pessoaAtualizada);
         } catch (error) {
-            return res.status(500).json(erro.message);
+            return res.status(500).json(error.message);
         }
     }
 
@@ -51,7 +51,7 @@ class PessoaController {
             await database.Pessoas.destroy({ where: { id: Number(id) }});
             return res.status(200).json({ message: `id ${id} deletado` });
         } catch (error) {
-            return res.status(500).json(erro.message);
+            return res.status(500).json(error.message);
         }
     }
     
@@ -62,11 +62,11 @@ class PessoaController {
                 { where: {
                     id: Number(matriculaId),
                     estudante_id: Number(estudanteId)  
-                }, include: { model: database.Pessoas , attributes: ['nome']}
-            });
+                }, include: { model: database.Pessoas , attributes: ["nome"]}
+                });
             return res.status(200).json(umaMatricula);
         } catch (error) {
-            return res.status(500).json(erro.message);
+            return res.status(500).json(error.message);
         }
     }
 
@@ -77,7 +77,7 @@ class PessoaController {
             const novaMatriculaCriada = await database.Matriculas.create(novaMatricula);
             return res.status(201).json(novaMatriculaCriada);
         } catch (error) {
-            return res.status(500).json(erro.message);
+            return res.status(500).json(error.message);
         }
     }
 
@@ -98,7 +98,7 @@ class PessoaController {
                 }});
             return res.status(200).json(matriculaAtualizada);
         } catch (error) {
-            return res.status(500).json(erro.message);
+            return res.status(500).json(error.message);
         }
     }
 
@@ -113,7 +113,7 @@ class PessoaController {
                 }});
             return res.status(200).json({ message: `id ${matriculaId} deletado` });
         } catch (error) {
-            return res.status(500).json(erro.message);
+            return res.status(500).json(error.message);
         }
     }
 
@@ -123,7 +123,7 @@ class PessoaController {
             const todasMatriculas = await database.Matriculas.findAll({
                 include: { 
                     model: database.Pessoas, 
-                    attributes: ['nome'], 
+                    attributes: ["nome"], 
                     where: { 
                         id: estudanteId
                     }
@@ -131,7 +131,7 @@ class PessoaController {
             });
             return res.status(200).json(todasMatriculas);
         } catch (error) {
-            return res.status(500).json(erro.message);
+            return res.status(500).json(error.message);
         }
     }
 }
